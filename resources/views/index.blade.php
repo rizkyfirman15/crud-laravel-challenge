@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Question Data</h1>
+            <h1>Question Data</h1>  
           </div>
           <div class="col-sm-6">
         
@@ -35,8 +35,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Question Title</th>
-                                    <th>Fill out the Question</th>
+                                    <th style="width: 30%">Question Title</th>
+                                    <th style="width: 50%">Fill out the Question</th>
                                     <th>Option</th>
                                 </tr>
                             </thead>
@@ -46,9 +46,18 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$value->judul}}</td>
-                                        <td>{{$value->isi}}</td>
                                         <td>
-                                            <a href="/jawaban/{{$value->id}}" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i> Answer</a>
+                                          {{$value->isi}}
+                                          <a href="/jawaban/{{$value->id}}" class="btn btn-secondary btn-sm"><i class="fas fa-comments"></i> comment</a>
+                                        </td>
+                                        <td>
+                                          <a href="/pertanyaan/{{ $value->id }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                            <a href="/pertanyaan/{{ $value->id }}/edit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                            <form action="/pertanyaan/{{ $value->id }}" method="POST" style="display: inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
                                         </td>
 
                                         {{-- <td><a href="/jawaban/{{$value->id}}">

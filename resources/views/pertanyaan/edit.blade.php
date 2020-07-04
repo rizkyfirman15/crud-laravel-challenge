@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Larahub | Add Question')
+@section('title', 'Larahub | Update Question')
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Question</h1>
+            <h1>Update Question</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -30,21 +30,30 @@
                 <div class="card-body">
                     <div class="card card-primary">
                         <div class="card-header">
-                          <h3 class="card-title">Form Add</h3>
+                          <h3 class="card-title">Form Update</h3>
                         </div>
                         <div class="card-body">
                           <!-- Date range -->
-                          <form action="{{ url('/pertanyaan') }}" method="POST">
+                          <form action="/pertanyaan/{{ $value->id }}" method="POST">
                             {{ csrf_field() }}
+                            @method('PUT')
                             <div class="form-group">
-                              <h3>Please Ask a Question!</h3>
+                              <h3>Please update your question!</h3>
                               <label for="judul">Question title:</label>
-                              <input type="text" class="form-control" name="judul" id="judul">
+                              <input type="text" class="form-control" name="judul" id="judul" value="{{ $value->judul }}">
                           </div>
                           <div class="form-group">
                               <label for="isi">Fill out the question:</label><br/>
-                              <textarea style="width:100%" name="isi"></textarea>
-                          </div>          
+                                <textarea style="width:600px; height:100px" class="ckeditor" id="isi" name="isi">{{ $value->isi }}</textarea>
+                          </div> 
+                          <div class="form-group">
+                            <label for="tgl_dibuat">Date Created:</label>
+                            <input type="date" class="form-control" name="tgl_dibuat" id="tgl_dibuat" value="{{ $value->tgl_dibuat }}">
+                        </div>
+                        <div class="form-group">
+                          <label for="tgl_diperbaharui">Date Updated:</label>
+                          <input type="date" class="form-control" name="tgl_diperbaharui" id="tgl_diperbaharui" value="{{ $value->tgl_diperbaharui }}">
+                      </div>         
                           <div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send</button>
                           </div>
